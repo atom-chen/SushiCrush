@@ -20,7 +20,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
         director->setOpenGLView(glview);
     }
     
-    glview->setDesignResolutionSize(320.0f, 480.0f, ResolutionPolicy::FIXED_WIDTH);
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+	glview->setFrameSize(320, 640.0f);
+	glview->setDesignResolutionSize(320, 640.0f, ResolutionPolicy::EXACT_FIT);
+#endif
     std::vector<std::string> searchPath;
     searchPath.push_back("w640");
     CCFileUtils::getInstance()->setSearchPaths(searchPath);
